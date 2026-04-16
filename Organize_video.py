@@ -19,18 +19,16 @@ def organize_dataset(csv_path, source_video_dir, target_root_dir):
     # key: 파일명 앞부분(ID), value: [전체 경로 리스트]
     id_to_paths = {}
     
-    for root, dirs, files in os.walk(source_video_dir):
-        for file in files:
-            # 파일명에서 확장자 제거 후, 마지막 '_' 앞까지만 잘라서 ID 추출
-            # 예: NIA_SL_SEN0001_REAL02_D.mp4 -> NIA_SL_SEN0001_REAL02
-            file_name_no_ext = os.path.splitext(file)[0]
-            file_id = "_".join(file_name_no_ext.split('_')[:-1]) if '_' in file_name_no_ext else file_name_no_ext
-            
-            if file_id not in id_to_paths:
-                id_to_paths[file_id] = []
-            id_to_paths[file_id].append(os.path.join(root, file))
-    
-    print(f"[*] 스캔 완료: 고유 ID {len(id_to_paths)}개 발견")
+    # 수정 제안: 모든 하위 폴더의 mp4를 다 찾아내는 방식
+    video_files = {}
+    for root, dirs, files in os.walk("./video"):
+        for f in files:
+            if f.endswith('.mp4'):
+                # 파일명에서 ID 추출 (파일명과 CSV ID가 일치해야 함)
+                file_id = os.path.splitext(f)[0] 
+                video_files[file_id] = os.path.join(root, f)
+
+    print(f"[*] 스캔 완료: 실제 영상 파일 {len(video_files)}개 발견")
 
     # 2. 정리 작업
     success_count = 0
