@@ -56,6 +56,6 @@ def extract_frames(video_path):
     return np.array(frames, dtype=np.uint8) if frames else None
 
 if __name__ == "__main__":
-    SOURCE = r"D:\VITA\NIA_SignLanguage_Dataset\train"
-    SAVE = r"D:\VITA\NIA_SignLanguage_Dataset\train_npy"
+    SOURCE = ".\train"
+    SAVE = ".\train_npy"
     build_sign_dataset_npy(SOURCE, SAVE)
