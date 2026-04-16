@@ -71,8 +71,8 @@ def organize_dataset(csv_path, source_video_dir, target_root_dir):
     print(f"- 매칭 실패한 ID 수: {missing_count}개")
 
 # --- 설정 구간 ---
-SOURCE_VIDEO_ROOT = r'D:\VITA\video' 
-OUTPUT_ROOT = r'D:\VITA\NIA_SignLanguage_Dataset'
+SOURCE_VIDEO_ROOT = './video' 
+OUTPUT_ROOT = '/NIA_SignLanguage_Dataset'
 
 tasks = [
     {'csv': 'NIA_SEN_train.csv', 'subdir': 'train'},
